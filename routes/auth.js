@@ -33,3 +33,19 @@ authRouter.post('/signup', (req, res)=>{
   });
 });
 
+authRouter.post('/login', async (req, res) =>{
+  
+  // Find user and validate password
+  const user = await User.findOne({email: req.body.email});
+  if(!user) return res.status(400).json({msg: 'User not registered'});
+  let validPassword = bcrypt.compareSync(req.body.password, user.password);
+  if(!validPassword) return res.status(500).json({msg: 'Wrong password'});
+  
+  // Create token valid for 5 minutes
+  const token = jwt.sign({id: user._id}, process.env.SECRET, {expiresIn: 300});
+  delete user._doc.password;
+
+  res.status(200).json({user, token, msg:'User logged succesfully'});
+
+});
+
