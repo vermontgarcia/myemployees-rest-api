@@ -58,6 +58,7 @@ app.locals.title = 'My Employees API';
 
 // API routes
 const index = require('./routes/index');
+const authRouter = require('./routes/auth');
 const employeeRouter = require('./routes/employees');
 
 app.use('/', index);
