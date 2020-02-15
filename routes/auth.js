@@ -23,7 +23,7 @@ authRouter.post('/signup', (req, res)=>{
 
   User.create(user)
   .then(user => {
-    const token = jwt.sign({id: user._id}, process.env.SECRET);
+    const token = jwt.sign({id: user._id}, process.env.SECRET, {expiresIn: 300});
     delete user._doc.password;
     res.status(200).json({msg: 'User created succesfully', user, token});
   })
@@ -49,3 +49,14 @@ authRouter.post('/login', async (req, res) =>{
 
 });
 
+authRouter.get('/loggedin', (req, res) => {
+
+  // User session validation by token
+  const token = req.header['x-access-token'];
+  if(!token) return res.status(403).json({msg: 'Token not received'});
+
+  jwt.verify(token, process.env.SECRET, async (err)=>{
+    if(err) return res.status(403).json({msg: 'Session expired, please login'});
+    res.status(200).json({msg: 'Valid user and session'});
+  });
+});
