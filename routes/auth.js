@@ -9,7 +9,7 @@ const jwt = require('jsonwebtoken');
 
 authRouter.post('/signup', (req, res)=>{
   // Password validation, encryption, user creation on data base and token creation
-  if(req.body.password !== req.body.confirm) return res.status(500).json({msg: 'Password missmatch'});
+  if(req.body.password !== req.body.confirmPassword) return res.status(500).json({msg: 'Password missmatch'});
 
   const salt = bcrypt.genSaltSync(256);
   const hashedPassword = bcrypt.hashSync(req.body.password, salt);
@@ -60,3 +60,6 @@ authRouter.get('/loggedin', (req, res) => {
     res.status(200).json({msg: 'Valid user and session'});
   });
 });
+
+
+module.exports = authRouter;
