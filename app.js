@@ -31,7 +31,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 
-//Cors
+//Cors white list
 
 app.use(cors({
   origin: ['http://localhost:3000','https://compare-it-mern.herokuapp.com']
@@ -52,15 +52,21 @@ app.set('view engine', 'hbs');
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(favicon(path.join(__dirname, 'public', 'images', 'favicon.ico')));
 
-
-
 // default value for title local
 app.locals.title = 'My Employees API';
 
 
-
+// API routes
 const index = require('./routes/index');
-app.use('/', index);
+const employeeRouter = require('./routes/employees');
 
+app.use('/', index);
+app.use('/api/auth', authRouter);
+app.use('/api/employee', employeeRouter);
+
+// Integrating REACT app into REST API files
+app.all('*', (req, res) => {
+  res.sendFile(`${__dirname}/public/index.html`);
+})
 
 module.exports = app;
