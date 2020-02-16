@@ -13,7 +13,7 @@ const LogSchema = new Schema({
   },
   logName: {
     type: String,
-    enum: ['signup','login','consult' ],
+    enum: ['User signup','User login','Employee consult' ],
     required: 'Log name most be defined'
   }
 },{
