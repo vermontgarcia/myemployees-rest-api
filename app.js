@@ -60,10 +60,12 @@ app.locals.title = 'My Employees API';
 const index = require('./routes/index');
 const authRouter = require('./routes/auth');
 const employeeRouter = require('./routes/employees');
+const logRouter = require('./routes/log');
 
 app.use('/', index);
 app.use('/api/auth', authRouter);
 app.use('/api/employee', employeeRouter);
+app.use('/api', logRouter);
 
 // Integrating REACT app into REST API files
 app.all('*', (req, res) => {
