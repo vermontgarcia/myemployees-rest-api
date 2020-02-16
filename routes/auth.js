@@ -52,7 +52,7 @@ authRouter.post('/login', async (req, res) =>{
 authRouter.get('/loggedin', (req, res) => {
 
   // User session validation by token
-  const token = req.header['x-access-token'];
+  const token = req.headers['x-access-token'];
   if(!token) return res.status(403).json({msg: 'Token not received'});
 
   jwt.verify(token, process.env.SECRET, async (err)=>{
