@@ -34,7 +34,7 @@ app.use(cookieParser());
 //Cors white list
 
 app.use(cors({
-  origin: ['http://localhost:3000','https://my-employees-2020.herokuapp.com']
+  origin: ['http://localhost:4500','https://compare-it-mern.herokuapp.com']
 }));
 
 
