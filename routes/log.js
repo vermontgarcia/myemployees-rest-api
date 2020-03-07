@@ -14,4 +14,18 @@ logRouter.post('/log', (req, res) => {
     });
 });
 
+logRouter.get('/log', (req, res) => {
+
+  Log.find()
+    .populate('userId', 'name')
+    .populate('employeeId', 'name')
+    .sort({created_at: 1})
+    .then(logs => {
+      res.status(200).json({logs, msg: 'Log retrieved succesfully'});
+    })
+    .catch(err => {
+      res.status(500).json({err, msg:'Something went wrong. Log not retrieved'});
+    });
+})
+
 module.exports = logRouter;
