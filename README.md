@@ -14,7 +14,7 @@ The goal of this is to keep a record of how frequent the directory is being used
 
 ### `Client`
 
-– A web application that communicates with the server and displays a user interface. The Client Repo [myemployees-rest-api](https://github.com/vermontgarcia/myemployees-mern-app)
+– A web application that communicates with the server and displays a user interface. The Client Repo [myemployees-mern-app](https://github.com/vermontgarcia/myemployees-mern-app)
 
 ### `Database`
 
