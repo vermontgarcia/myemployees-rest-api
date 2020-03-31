@@ -10,11 +10,11 @@ The goal of this is to keep a record of how frequent the directory is being used
 
 ### `Server` 
 
-– A server that can receive requests to save and read from a database that contains the list of employees and check-ins. A REST API with basic CRUD operations. The Server repo [myemployees-rest-api](https://github.com/vermontgarcia/myemployees-mern-app)
+– A server that can receive requests to save and read from a database that contains the list of employees and check-ins. A REST API with basic CRUD operations. 
 
 ### `Client`
 
-– A web application that communicates with the server and displays a user interface.
+– A web application that communicates with the server and displays a user interface. The Client Repo [myemployees-rest-api](https://github.com/vermontgarcia/myemployees-mern-app)
 
 ### `Database`
 
