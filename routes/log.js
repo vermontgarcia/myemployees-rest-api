@@ -16,16 +16,32 @@ logRouter.post('/log', (req, res) => {
 
 logRouter.get('/log', (req, res) => {
 
-  Log.find()
-    .populate('userId', 'name')
-    .populate('employeeId', 'name')
-    .sort({created_at: 1})
-    .then(logs => {
-      res.status(200).json({logs, msg: 'Log retrieved succesfully'});
-    })
-    .catch(err => {
-      res.status(500).json({err, msg:'Something went wrong. Log not retrieved'});
-    });
+  let page = parseInt(req.body.page)
+  let size = parseInt(req.body.size)
+  let query = {};
+  let totalPages = 1;
+  
+  if(page < 0 || page === 0) {
+    return res.status(500).json({msg: 'Invalid page number, should start from page 1'});
+  }
+  query.skip = size * (page - 1)
+  query.limit = size
+
+  Log.countDocuments()
+    .then(total => {
+      totalPages = Math.ceil(total / size)
+
+      Log.find({},{},query)
+      .populate('userId', 'name position department profilePicture')
+      .populate('employeeId', 'name position department profilePicture')
+      .sort({created_at: 1})
+      .then(logs => {
+        res.status(200).json({logs, pages: totalPages, msg: 'Log retrieved succesfully'});
+      })
+      .catch(err => {
+        res.status(500).json({err, msg:'Something went wrong. Log not retrieved'});
+      });
+    }); 
 })
 
 module.exports = logRouter;
