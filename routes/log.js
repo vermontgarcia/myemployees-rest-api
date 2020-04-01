@@ -16,8 +16,10 @@ logRouter.post('/log', (req, res) => {
 
 logRouter.get('/log', (req, res) => {
 
-  let page = parseInt(req.body.page)
-  let size = parseInt(req.body.size)
+  console.log('Pagination', req.headers)
+
+  let page = parseInt(req.headers.page)
+  let size = parseInt(req.headers.size)
   let query = {};
   let totalPages = 1;
   
