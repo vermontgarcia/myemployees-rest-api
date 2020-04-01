@@ -10,7 +10,7 @@ logRouter.post('/log', (req, res) => {
       res.status(200).json({msg: 'Log created succesfully', log});
     })
     .catch(err => {
-      res.status(500).json({err, msg:'Log not recorded'});
+      res.status(500).json({err, msg:'Log not registered'});
     });
 });
 
