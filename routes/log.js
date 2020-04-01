@@ -16,8 +16,6 @@ logRouter.post('/log', (req, res) => {
 
 logRouter.get('/log', (req, res) => {
 
-  console.log('Pagination', req.headers)
-
   let page = parseInt(req.headers.page)
   let size = parseInt(req.headers.size)
   let query = {};
@@ -36,7 +34,7 @@ logRouter.get('/log', (req, res) => {
       Log.find({},{},query)
       .populate('userId', 'name position department profilePicture')
       .populate('employeeId', 'name position department profilePicture')
-      .sort({created_at: 1})
+      .sort({created_at: -1})
       .then(logs => {
         res.status(200).json({logs, pages: totalPages, msg: 'Log retrieved succesfully'});
       })
